@@ -1,0 +1,59 @@
+package com.springrest.springrest.services;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.springrest.springrest.entities.Course;
+@Service
+public class CourseServiceImpl implements CourseService {
+	
+	
+	//For temporarily storing the data.
+	//we need to fetch data from db if we need permanent storage
+	List<Course> list;
+	//Below one is a constructor.A constructor in java is a block of code similar to a method that is called when an instance 
+	//of an object is created.
+	//A constructor is called automatically when a new instance of an object is created.
+	public  CourseServiceImpl() {
+		list=new ArrayList<>();
+		list.add(new Course(145,"Java core course","this course contains basics of java"));
+		list.add(new Course(4343,"spring boot course","creating rest api using spring boot"));
+		
+	}
+	
+	
+	
+
+	@Override
+	public List<Course> getCourses() {
+		// TODO Auto-generated method stub
+		return list;
+	}
+
+
+
+
+	@Override
+	public Course getCourse(long courseId) {
+		Course c=null;
+		for(Course course:list) {
+			if(course.getId()==courseId) {
+				c=course;
+				break;
+			}
+		}
+		return c;
+	}
+
+
+
+
+	@Override
+	public Course addCourse(Course course) {
+		list.add(course);
+		return course;
+	}
+
+}
